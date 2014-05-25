@@ -4,8 +4,7 @@ var path = require('path'),
   // db = require('../model'),
   config = require('./config.js'),
   cookieParser = require('cookie-parser'),
-  bodyParser = require('body-parser'),
-  routes = require('../routes/index');
+  bodyParser = require('body-parser');
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
@@ -19,9 +18,16 @@ module.exports = function(app, express) {
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, '../public')));
 
-  app.enable('trust proxy')
-  app.disable('x-powered-by')
+  app.enable('trust proxy');
+  app.disable('x-powered-by');
 
+  var controller = {};
+  require("fs").readdirSync("./app/controller").forEach(function(file) {
+    file_class = file.substring(0, file.length - 3);
+    controller[file_class] = require("../controller/" + file_class);
+  });
+
+  routes = require('../routes/index')(express,controller);
   app.use(routes);
   app.use(require('asset-pipeline')({
     // reference to a server itself (used in views rendering)
