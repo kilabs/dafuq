@@ -1,7 +1,7 @@
 var path = require('path'),
   favicon = require('static-favicon'),
   logger = require('morgan'),
-  // db = require('../model'),
+  db = require('../model'),
   config = require('./config.js'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
@@ -60,26 +60,26 @@ module.exports = function(app, express) {
     });
   }
 
-  // // production error handler
-  // // no stacktraces leaked to user
-  // app.use(function(err, req, res, next) {
-  //   res.status(err.status || 500);
-  //   res.render('error', {
-  //     message: err.message,
-  //     error: {}
-  //   });
-  // });
+  // production error handler
+  // no stacktraces leaked to user
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
+  });
 
-  // db.sequelize
-  //   .sync({
-  //     force: true
-  //   })
-  //   .complete(function(err) {
-  //     if (err) {
-  //       throw err
-  //     } else {
-  //       console.log('Express server listening on port ' + app.get('port'))
-  //     }
-  //   })
+  db.sequelize
+    .sync({
+      force: true
+    })
+    .complete(function(err) {
+      if (err) {
+        throw err
+      } else {
+        // console.log(Express server' listening on port ' + app.get('port'))
+      }
+    })
   return expressc;
 }
