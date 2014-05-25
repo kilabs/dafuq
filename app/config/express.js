@@ -6,6 +6,7 @@ var path = require('path'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   routes = require('../routes/index');
+
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
