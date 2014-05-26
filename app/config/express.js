@@ -1,11 +1,15 @@
 var path = require('path'),
   favicon = require('static-favicon'),
   logger = require('morgan'),
-  db = require('../model'),
+  mongoose = require('mongoose'),
   config = require('./config.js'),
+  db = require('../model'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   routes = require('../routes/index');
+//shit connect to mongo
+mongoose.connect(config.mongo);
+
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
@@ -70,16 +74,16 @@ module.exports = function(app, express) {
     });
   });
 
-  db.sequelize
-    .sync({
-      force: true
-    })
-    .complete(function(err) {
-      if (err) {
-        throw err
-      } else {
-        // console.log(Express server' listening on port ' + app.get('port'))
-      }
-    })
+  // db.sequelize
+  //   .sync({
+  //     force: true
+  //   })
+  //   .complete(function(err) {
+  //     if (err) {
+  //       throw err
+  //     } else {
+  //       // console.log(Express server' listening on port ' + app.get('port'))
+  //     }
+  //   })
   return expressc;
 }

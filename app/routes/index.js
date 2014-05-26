@@ -6,6 +6,8 @@ module.exports = function(express, controller) {
 
   router.get('/', controller.main.index);
   router.get('/user', controller.main.user);
+  router.post('/api', controller.api.save);
+  router.get('/api', controller.api.index);
 
   return router;
 }
