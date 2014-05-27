@@ -20,7 +20,7 @@ function mainController($scope, $http) {
       .success(function(data) {
         console.log(e);
         $scope.formData = {}; // clear the form
-        $scope.todos = data;
+        $scope.vote = data;
       })
       .error(function(data) {
         console.log('Error: ' + $http.post);
