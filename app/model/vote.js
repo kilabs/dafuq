@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('vote', {
-  id_: String,
+  president: String,
   created: {
     type: Date,
     default: Date.now

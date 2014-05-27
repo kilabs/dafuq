@@ -3,8 +3,14 @@ var vote = require('../model/vote');
 
 exports.save = function(req, res) {
   // create a todo, information comes from AJAX request from Angular
+  req.setEncoding('utf8');
+  console.log(req.body.text);
+  console.log(req.is('text/*'));
+  console.log(req.is('json'));
+  console.log('RB: ' + req.rawBody);
+  console.log('B: ' + JSON.stringify(req.body));
   vote.create({
-    id_: '1',
+    president: req.body.text,
   }, function(err, votes) {
     if (err)
       res.send(err);

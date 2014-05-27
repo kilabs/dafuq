@@ -13,14 +13,17 @@ function mainController($scope, $http) {
     });
 
   // when submitting the add form, send the text to the node API
-  $scope.createTodo = function() {
-    $http.post('/api/todos', $scope.formData)
+  $scope.createTodo = function(e) {
+    $http.post('/api', {
+      text: e
+    })
       .success(function(data) {
+        console.log(e);
         $scope.formData = {}; // clear the form
         $scope.todos = data;
       })
       .error(function(data) {
-        console.log('Error: ' + data);
+        console.log('Error: ' + $http.post);
       });
   };
 
