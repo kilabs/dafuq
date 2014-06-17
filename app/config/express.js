@@ -43,14 +43,6 @@ module.exports = function(app, express) {
 
   routes = require('../routes/index')(express, controller);
   app.use(routes);
-  app.use(require('asset-pipeline')({
-    // reference to a server itself (used in views rendering)
-    server: app,
-    // directory with your stylesheets or client-side scripts
-    assets: '../public',
-    // directory for cache
-    cache: '../cache',
-  }))
 
   /// catch 404 and forwarding to error handler
   app.use(function(req, res, next) {
