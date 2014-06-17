@@ -5,7 +5,8 @@ var path = require('path'),
   config = require('./config.js'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
-  routes = require('../routes/index');
+  routes = require('../routes/index'),
+  session = require('express-session');
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
@@ -17,6 +18,15 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded());
   app.use(cookieParser());
+  app.use(session({
+    secret: 'keyboard cat',
+    cookie: {
+      domain: config.host + ':' + config.port,
+      secure: true
+    },
+    proxy: false // if you do SSL outside of node.
+  }))
+  console.log(config.host);
   app.use(express.static(path.join(__dirname, '../../public')));
 
   app.enable('trust proxy');
