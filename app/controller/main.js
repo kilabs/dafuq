@@ -5,9 +5,3 @@ exports.index = function(req, res) {
     title: 'Express'
   });
 }
-exports.user = function(req, res) {
-  res.render('index', {
-    layout: 'layout',
-    title: 'user',
-  })
-}
