@@ -5,9 +5,7 @@ module.exports = function(express, controller) {
   /* GET home page. */
   /* format  router(method(post/get/put) / path/controller.(controller name).controller method)*/
 
-  router.get('/user', controller.main.user);
-
-
+  router.get('/', controller.main.index);
   return router;
 }
 

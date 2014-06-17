@@ -1,17 +1,20 @@
 var path = require('path'),
   favicon = require('static-favicon'),
   logger = require('morgan'),
-  db = require('../model'),
+  mongoose = require('mongoose'),
   config = require('./config.js'),
+  db = require('../model'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   routes = require('../routes/index'),
   session = require('express-session');
+//shit connect to mongo
+mongoose.connect(config.mongo);
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
   app.set('views', path.join(__dirname, '../views'));
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
   app.use(favicon());
   app.use(require("connect-assets")());
   app.use(logger('dev'));
@@ -80,16 +83,16 @@ module.exports = function(app, express) {
     });
   });
 
-  db.sequelize
-    .sync({
-      force: true
-    })
-    .complete(function(err) {
-      if (err) {
-        throw err
-      } else {
-        // console.log(Express server' listening on port ' + app.get('port'))
-      }
-    })
+  // db.sequelize
+  //   .sync({
+  //     force: true
+  //   })
+  //   .complete(function(err) {
+  //     if (err) {
+  //       throw err
+  //     } else {
+  //       // console.log(Express server' listening on port ' + app.get('port'))
+  //     }
+  //   })
   return expressc;
 }
