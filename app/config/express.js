@@ -9,12 +9,14 @@ var path = require('path'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   routes = require('../routes/index'),
+  engine = require('ejs-locals'),
   session = require('express-session');
 //shit connect to mongo
 mongoose.connect(config.mongo);
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
+  app.engine('ejs', engine);
   app.set('views', path.join(__dirname, '../views'));
   app.set('view engine', 'ejs');
   app.use(passport.initialize());
