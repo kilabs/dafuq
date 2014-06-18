@@ -6,5 +6,6 @@ exports.index = function(req, res) {
   });
 }
 exports.auth = function(req, res) {
-  res.send('Success');
+  console.log(req.body)
+  res.send(req.body.email);
 }

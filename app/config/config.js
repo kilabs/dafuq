@@ -2,7 +2,7 @@ var config = {
   development: {
     port: 3000,
     host: "vanbungkring.dev",
-    mongo: "mongodb://localhost:27017/vote"
+    mongo: "mongodb://localhost:27017/survey"
   },
   test: {
     port: 3000,
