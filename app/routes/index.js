@@ -6,6 +6,8 @@ module.exports = function(express, controller) {
   /* format  router(method(post/get/put) / path/controller.(controller name).controller method)*/
 
   router.get('/', controller.main.index);
+  router.get('/login', controller.login.index);
+  router.get('/register', controller.register.index);
   return router;
 }
 
