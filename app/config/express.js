@@ -1,6 +1,8 @@
 var path = require('path'),
   favicon = require('static-favicon'),
   logger = require('morgan'),
+  passport = require('passport'),
+  db = require('passport'),
   mongoose = require('mongoose'),
   config = require('./config.js'),
   db = require('../model'),
@@ -15,6 +17,8 @@ module.exports = function(app, express) {
   // view engine setup
   app.set('views', path.join(__dirname, '../views'));
   app.set('view engine', 'ejs');
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(favicon());
   app.use(require("connect-assets")());
   app.use(logger('dev'));
@@ -75,16 +79,16 @@ module.exports = function(app, express) {
     });
   });
 
-  // db.sequelize
-  //   .sync({
-  //     force: true
-  //   })
-  //   .complete(function(err) {
-  //     if (err) {
-  //       throw err
-  //     } else {
-  //       // console.log(Express server' listening on port ' + app.get('port'))
-  //     }
-  //   })
+  db.sequelize
+    .sync({
+      force: true
+    })
+    .complete(function(err) {
+      if (err) {
+        throw err
+      } else {
+        // console.log(Express server' listening on port ' + app.get('port'))
+      }
+    })
   return expressc;
 }
