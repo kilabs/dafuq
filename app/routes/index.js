@@ -7,7 +7,10 @@ module.exports = function(express, controller) {
 
   router.get('/', controller.main.index);
   router.get('/login', controller.login.index);
+  router.post('/login/', controller.login.auth);
+
   router.get('/register', controller.register.index);
+
   return router;
 }
 

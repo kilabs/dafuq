@@ -5,3 +5,6 @@ exports.index = function(req, res) {
     title: 'Login'
   });
 }
+exports.auth = function(req, res) {
+  res.send('Success');
+}
