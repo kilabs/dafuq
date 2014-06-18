@@ -6,6 +6,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   config = require('./config.js'),
   db = require('../model'),
+  compression = require('compression'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   routes = require('../routes/index'),
@@ -27,6 +28,12 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded());
   app.use(cookieParser());
+  app.use(compression({
+    filter: function(req, res) {
+      return /json|text|javascript|css/.test(res.getHeader('Content-Type'))
+    },
+    level: 9
+  }))
   app.use(session({
     secret: 'keyboard cat',
     cookie: {

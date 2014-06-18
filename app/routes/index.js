@@ -11,6 +11,8 @@ module.exports = function(express, controller) {
 
   router.get('/register', controller.register.index);
 
+  router.get('/dashboard', controller.dashboard.index);
+
   return router;
 }
 
