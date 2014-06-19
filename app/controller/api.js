@@ -1,34 +1,27 @@
-// var async = require('async');
-// var vote = require('../model/vote');
-
-// exports.save = function(req, res) {
-//   // create a todo, information comes from AJAX request from Angular
-//   req.setEncoding('utf8');
-//   console.log(req.body.text);
-//   console.log(req.is('text/*'));
-//   console.log(req.is('json'));
-//   console.log('RB: ' + req.rawBody);
-//   console.log('B: ' + JSON.stringify(req.body));
-//   vote.create({
-//     president: req.body.text,
-//   }, function(err, votes) {
-//     if (err)
-//       res.send(err);
-//     else
-//       vote.find(function(err, todos) {
-//         res.json(todos);
-//       })
-//   })
-// }
-// exports.index = function(req, res) {
-
-//   // use mongoose to get all todos in the database
-//   vote.find(function(err, todos) {
-
-//     // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-//     if (err)
-//       res.send(err)
-
-//     res.json(todos); // return all todos in JSON format
-//   });
-// }
+var async = require('async');
+var db = require('../model');
+var crypto = require('crypto');
+exports.index = function(req, res) {
+  res.send({
+    message: '200 OK'
+  });
+}
+exports.setUser = function(req, res) {
+  var tokens;
+  db.User.create({
+    username: req.param('username').toString(),
+    name: req.param('name').toString(),
+    token: crypto.createHash('md5').update(req.param('email').toString() + req.param('username').toString() + req.param('password').toString()).digest('hex'),
+    password: crypto.createHash('md5').update(req.param('password').toString()).digest('hex'),
+    email: req.param('email').toString(),
+  }).success(function() {
+    res.send({
+      "status": "Success",
+      "token": crypto.createHash('md5').update(req.param('email').toString() + req.param('username').toString() + req.param('password').toString()).digest('hex')
+    })
+  }).error(function(e) {
+    res.send({
+      "error": e
+    })
+  })
+}

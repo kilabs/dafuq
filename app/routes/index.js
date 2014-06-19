@@ -13,6 +13,10 @@ module.exports = function(express, controller) {
 
   router.get('/dashboard', controller.dashboard.index);
 
+  ///api
+  router.get('/api', controller.api.index);
+  router.post('/api/register', controller.api.setUser)
+
   return router;
 }
 

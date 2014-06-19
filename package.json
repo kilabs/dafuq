@@ -32,6 +32,7 @@
     "ejs-locals": "^1.0.2",
     "express-flash": "0.0.2",
     "compression": "^1.0.7",
-    "nconf": "^0.6.9"
+    "nconf": "^0.6.9",
+    "crypto": "0.0.3"
   }
 }
