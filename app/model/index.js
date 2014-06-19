@@ -2,12 +2,12 @@ var fs = require('fs'),
   path = require('path'),
   Sequelize = require('sequelize'),
   lodash = require('lodash'),
-  config = require("../../config/config.json")
-  sequelize = new Sequelize(config.database, config.username, config.password, {
-    dialect: "mysql", // or 'sqlite', 'postgres', 'mariadb'
-    port: 3306, // or 5432 (for postgres)
-  }),
-  db = {}
+  config = require("../../config/config.json")[process.env.NODE_ENV || 'development'];
+sequelize = new Sequelize(config.database, config.username, config.password, {
+  dialect: config.dialect, // or 'sqlite', 'postgres', 'mariadb'
+  port: 3306, // or 5432 (for postgres)
+});
+db = {}
 
 fs
   .readdirSync(__dirname)
