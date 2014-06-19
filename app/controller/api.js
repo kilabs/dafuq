@@ -20,13 +20,13 @@ exports.setUser = function(req, res) {
 
     res.send({
       "status": "Success",
-      "token": crypto.createHash('md5').update(req.param('email').toString() + req.param('username').toString() + req.param('password').toString()).digest('hex')
+      "token": crypto.createHash('md5').update(req.param('email').toString() + req.param('username').toString() + req.param('password').toString()).digest('hex'),
     })
 
   }).error(function(e) {
 
     res.send({
-      "error": e
+      "error": e.code
     })
 
   })
