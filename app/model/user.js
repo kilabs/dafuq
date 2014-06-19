@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate: {
         len: {
           args: 3,
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate: {
         len: {
           args: 3,
@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate: {
         len: {
           args: [6, 128],
@@ -64,9 +64,11 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.Task)
       },
-      findUser: function() {
-        return User.findAll()
-      }
+      findAllUser: function(users) {
+        this.findAll().on('success', function(getUser) {
+          users(getUser);
+        })
+      },
     }
   })
 

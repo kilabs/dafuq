@@ -3,8 +3,8 @@ var path = require('path'),
   logger = require('morgan'),
   passport = require('passport'),
   db = require('passport'),
-  mongoose = require('mongoose'),
   config = require('./config.js'),
+  multer = require('multer'),
   db = require('../model'),
   compression = require('compression'),
   cookieParser = require('cookie-parser'),
@@ -13,11 +13,16 @@ var path = require('path'),
   engine = require('ejs-locals'),
   session = require('express-session');
 //shit connect to mongo
-mongoose.connect(config.mongo);
 module.exports = function(app, express) {
   var expressc = this;
   // view engine setup
   app.engine('ejs', engine);
+  app.use(multer({
+    dest: './uploads/',
+    rename: function(fieldname, filename) {
+      return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+    }
+  }))
   app.set('views', path.join(__dirname, '../views'));
   app.set('view engine', 'ejs');
   app.use(passport.initialize());
@@ -90,7 +95,7 @@ module.exports = function(app, express) {
 
   db.sequelize
     .sync({
-      force: true
+      force: false
     })
     .complete(function(err) {
       if (err) {

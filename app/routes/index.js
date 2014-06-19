@@ -16,6 +16,7 @@ module.exports = function(express, controller) {
   ///api
   router.get('/api', controller.api.index);
   router.post('/api/register', controller.api.setUser)
+  router.get('/api/user', controller.api.getAllUser)
 
   return router;
 }
