@@ -1,0 +1,40 @@
+module.exports = function(sequelize, DataTypes) {
+  var Report = sequelize.define('Report', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    report_text: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        len: {
+          args: 10,
+          msg: "Name must be atleast 3 characters in length"
+        },
+        // fn: function(val) {
+        //   if (val !== "mustbethis") throw new Error("Custom validation failed");
+        // }
+      }
+    },
+
+    image_url_link: {
+      type: DataTypes.STRING,
+    }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        Report.belongsTo(models.User)
+      },
+      findAllUser: function(users) {
+        this.findAll().on('success', function(getUser) {
+          users(getUser);
+        })
+      },
+    }
+  })
+
+  return Report
+}

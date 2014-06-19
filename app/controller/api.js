@@ -29,7 +29,9 @@ exports.setUser = function(req, res) {
   })
 }
 exports.getAllUser = function(req, res) {
-  db.User.findAllUser(function(id) {
-    res.send(id);
+  db.User.findAllUser(function(user) {
+    res.send({
+      data: user
+    });
   });
 }
