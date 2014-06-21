@@ -64,6 +64,9 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.Report)
       },
+      register: function(users) {
+
+      },
       findAllUser: function(users) {
         this.findAll().on('success', function(getUser) {
           users(getUser);
