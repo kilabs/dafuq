@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: false,
+      unique: true,
       validate: {
         len: {
           args: [6, 128],

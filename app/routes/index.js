@@ -1,4 +1,3 @@
-var start = +new Date(); // log start timestamp
 module.exports = function(express, controller) {
   var router = express.Router();
 
@@ -22,4 +21,3 @@ module.exports = function(express, controller) {
 }
 
 var end = +new Date(); // log end timestamp
-console.log(end - start)
