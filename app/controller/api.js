@@ -28,7 +28,16 @@ exports.setUser = function(req, res) {
 
   })
 }
+exports.register = function(req, res) {
+
+}
 exports.loginUser = function(req, res) {
+  db.User.login(function(data) {
+    res.send({
+      email: email
+    })
+  })
+
   // var email = req.param('username');
   // var password = crypto.createHash('md5').update(req.param('password').toString()).digest('hex');
   // var data = {
@@ -47,6 +56,8 @@ exports.loginUser = function(req, res) {
 
 exports.getAllUser = function(req, res) {
   db.User.findAllUser(function(user) {
+
+    console.log(user);
     res.send({
       data: user
     });
