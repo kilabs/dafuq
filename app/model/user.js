@@ -62,10 +62,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        this.hasMany(models.Report)
-      },
-      register: function(users) {
-
+        User.hasMany(models.Report)
       },
       findAllUser: function(users) {
         this.findAll().on('success', function(getUser) {
