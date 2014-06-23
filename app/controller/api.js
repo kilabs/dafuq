@@ -2,6 +2,7 @@ var async = require('async');
 var db = require('../model');
 var crypto = require('crypto');
 
+
 exports.index = function(req, res) {
   res.send({
     message: '200 OK'
@@ -34,4 +35,11 @@ exports.getAllUser = function(req, res) {
       data: user
     });
   });
+}
+exports.login = function(req, res, next) {
+  db.User.findAllUsers().then(function(users) {
+    res.send({
+      data: users
+    });
+  }, next);
 }

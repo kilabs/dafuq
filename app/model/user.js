@@ -64,6 +64,14 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.Report)
       },
+      findAllUsers: function(options) {
+        var params = {};
+        // options = options || {};
+
+        // if (options.username) params.where.username = options.username;
+        // if (options.password) params.where.password = options.password;
+        return this.findAll(params);
+      },
       findAllUser: function(users) {
         this.findAll().on('success', function(getUser) {
           users(getUser);
