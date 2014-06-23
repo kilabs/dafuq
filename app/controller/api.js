@@ -37,7 +37,10 @@ exports.getAllUser = function(req, res) {
   });
 }
 exports.login = function(req, res, next) {
-  db.User.findAllUsers().then(function(users) {
+  db.User.findAllUsers({
+    username: "vanbungkring",
+    password: "merdeka123"
+  }).then(function(users) {
     res.send({
       data: users
     });

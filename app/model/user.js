@@ -65,11 +65,13 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.Report)
       },
       findAllUsers: function(options) {
-        var params = {};
-        // options = options || {};
+        var params = {
+          where: {}
+        };
+        options = options || {};
 
-        // if (options.username) params.where.username = options.username;
-        // if (options.password) params.where.password = options.password;
+        if (options.username) params.where.username = options.username;
+        if (options.password) params.where.password = options.password;
         return this.findAll(params);
       },
       findAllUser: function(users) {
