@@ -64,6 +64,9 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.Report)
       },
+      registerUser: function(options) {
+        var params = {}
+      },
       findAllUsers: function(options) {
         var params = {
           where: {}
