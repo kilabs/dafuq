@@ -65,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.Report)
       },
       registerUser: function(options) {
-        var params = {}
+        console.log()
       },
       findAllUsers: function(options) {
         var params = {
